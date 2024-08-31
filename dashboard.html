@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Attendance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Attendance Tracker</h2>
+        <button id="logoutButton">Logout</button> <!-- Logout button -->
+        <button id="deleteAllButton">Delete All Records</button> <!-- Button to delete all records -->
+        <form id="attendanceForm">
+            <input type="text" id="subject" placeholder="Enter subject name" required>
+            <input type="date" id="date" required>
+            <select id="status">
+                <option value="present">Present</option>
+                <option value="absent">Absent</option>
+            </select>
+            <button type="submit">Add Attendance</button>
+        </form>
+        <h3>Attendance Records</h3>
+        <table id="attendanceTable">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th> <!-- Column for edit/delete actions -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Records will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+        <h3>Attendance Percentage</h3>
+        <ul id="attendancePercentage">
+            <!-- Attendance percentage will be calculated and displayed here -->
+        </ul>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

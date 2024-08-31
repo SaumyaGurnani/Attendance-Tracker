@@ -1,0 +1,83 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2c3e50; /* Dark blue background */
+    color: #ffffff; /* White text color */
+}
+
+/* Container Styles */
+.login-container, .dashboard-container {
+    width: 350px; /* Increased width for better readability */
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #3498db; /* Light blue background for containers */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for better focus */
+    border-radius: 10px; /* Increased border radius for smoother corners */
+}
+
+/* Headings */
+h2, h3 {
+    text-align: center;
+    color: #ecf0f1; /* Light grey text color */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select, button {
+    margin-bottom: 15px;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px; /* Rounded input elements */
+}
+
+/* Input and Select Elements */
+input[type="email"], input[type="text"], input[type="date"], select {
+    background-color: #ecf0f1; /* Light grey background for inputs */
+    color: #2c3e50; /* Dark blue text */
+}
+
+/* Button Styles */
+button {
+    background-color: #2980b9; /* Darker blue for buttons */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+button:hover {
+    background-color: #1c5980; /* Even darker blue on hover */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #ecf0f1; /* Light grey table background */
+}
+
+table, th, td {
+    border: 1px solid #bdc3c7; /* Light grey border */
+}
+
+th, td {
+    padding: 10px; /* Increased padding for better readability */
+    text-align: center;
+    color: #2c3e50; /* Dark blue text color for table cells */
+}
+
+/* Attendance Percentage List */
+ul {
+    list-style-type: none;
+    padding: 0;
+    color: #ecf0f1; /* Light grey text color for the list */
+}
