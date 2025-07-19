@@ -4,6 +4,8 @@ A modern, user-friendly web app for tracking personal attendance by students, bu
 
 ## Demo Video
 
+https://github.com/user-attachments/assets/b97ac10b-1d04-4b7b-ac78-0de5693db36d
+
 ## Deployed Link
 
 track-mate-attendance-tracker.vercel.app
