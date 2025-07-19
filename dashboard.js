@@ -149,16 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (editingIndex >= 0) {
       attendanceRecords[editingIndex] = newRecord;
     } else {
-      const existingIndex = attendanceRecords.findIndex(r => r.subject === subject && r.date === date);
-      if (existingIndex >= 0) {
-        if (confirm(`A record for ${subject} on ${date} already exists. Do you want to update it?`)) {
-          attendanceRecords[existingIndex] = newRecord;
-        } else {
-          return;
-        }
-      } else {
-        attendanceRecords.push(newRecord);
-      }
+      // Remove duplicate check: allow multiple records for same subject and date
+      attendanceRecords.push(newRecord);
     }
     saveAttendanceRecords(attendanceRecords);
     updateStats(attendanceRecords);

@@ -160,3 +160,8 @@ h2 {
 .absent-color {
     background: linear-gradient(45deg, #dc3545, #fd7e14);
 }
+
+/* Make FullCalendar day cells and events show pointer cursor on hover */
+.fc-daygrid-day, .fc-daygrid-event, .fc-event {
+  cursor: pointer;
+}
