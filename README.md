@@ -8,7 +8,7 @@ https://github.com/user-attachments/assets/b97ac10b-1d04-4b7b-ac78-0de5693db36d
 
 ## Deployed Link
 
-track-mate-attendance-tracker.vercel.app
+[track-mate-attendance-tracker.vercel.app](https://track-mate-attendance-tracker.vercel.app/)
 
 ## Features
 - **User Authentication**: Sign up and log in securely (localStorage-based demo).
