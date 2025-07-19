@@ -165,3 +165,65 @@ h2 {
 .fc-daygrid-day, .fc-daygrid-event, .fc-event {
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .dashboard-container, .login-container {
+    max-width: 100%;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .login-container {
+    width: 100%;
+    padding: 20px;
+  }
+  .calendar-container.card {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  .stats-card {
+    padding: 10px;
+    font-size: 0.95em;
+  }
+  .legend {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+  .legend-item {
+    font-size: 12px;
+  }
+  .nav-tabs {
+    flex-wrap: wrap;
+    font-size: 0.95em;
+  }
+  .modal-dialog {
+    max-width: 95vw;
+    margin: 1.75rem auto;
+  }
+  .modal-content {
+    padding: 5px;
+  }
+  .form-control, .form-select {
+    font-size: 1em;
+    padding: 8px 10px;
+  }
+  h1, h2, h3 {
+    font-size: 1.3em;
+  }
+  .fc-toolbar-title {
+    font-size: 1.1em;
+  }
+  .fc .fc-button {
+    font-size: 0.95em;
+    padding: 0.3em 0.7em;
+  }
+  .fc-daygrid-day {
+    min-height: 40px;
+  }
+  .list-group-item {
+    font-size: 0.97em;
+    padding: 8px 10px;
+  }
+}
