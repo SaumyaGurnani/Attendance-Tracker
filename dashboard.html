@@ -4,42 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Attendance Tracker</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="dashboard-container">
-        <h2>Attendance Tracker</h2>
-        <button id="logoutButton">Logout</button> <!-- Logout button -->
-        <button id="deleteAllButton">Delete All Records</button> <!-- Button to delete all records -->
-        <form id="attendanceForm">
-            <input type="text" id="subject" placeholder="Enter subject name" required>
-            <input type="date" id="date" required>
-            <select id="status">
-                <option value="present">Present</option>
-                <option value="absent">Absent</option>
-            </select>
-            <button type="submit">Add Attendance</button>
-        </form>
-        <h3>Attendance Records</h3>
-        <table id="attendanceTable">
-            <thead>
-                <tr>
-                    <th>Subject</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Actions</th> <!-- Column for edit/delete actions -->
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Records will be inserted here by JavaScript -->
-            </tbody>
-        </table>
-        <h3>Attendance Percentage</h3>
-        <ul id="attendancePercentage">
-            <!-- Attendance percentage will be calculated and displayed here -->
-        </ul>
+    <div class="container-fluid py-4">
+        <div class="dashboard-container p-4">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="text-primary mb-0"><i class="fas fa-calendar-check me-2"></i>Attendance Tracker</h1>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-gradient" data-bs-toggle="modal" data-bs-target="#addAttendanceModal">
+                        <i class="fas fa-plus me-2"></i>Add Record
+                    </button>
+                    <button class="btn btn-warning" id="deleteAllButton">
+                        <i class="fas fa-trash me-2"></i>Delete All
+                    </button>
+                    <button class="btn btn-danger" id="logoutButton">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistics Row -->
+            <div class="row mb-4" id="statsContainer">
+                <!-- Stats will be populated by JavaScript -->
+            </div>
+
+            <!-- Calendar -->
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button class="calendar-nav" id="prevMonth">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <h3 class="mb-0" id="currentMonth">January 2024</h3>
+                    <button class="calendar-nav" id="nextMonth">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend mt-3">
+                <div class="legend-item">
+                    <div class="legend-color present-color"></div>
+                    <span>Present</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color absent-color"></div>
+                    <span>Absent</span>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Add/Edit Attendance Modal -->
+    <div class="modal fade" id="addAttendanceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Add Attendance Record</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="attendanceForm">
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="subject" placeholder="Enter subject name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status">
+                                <option value="present">Present</option>
+                                <option value="absent">Absent</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="attendanceForm" class="btn btn-gradient" id="saveButton">Save Record</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Your custom JS -->
     <script src="dashboard.js"></script>
 </body>
 </html>
