@@ -90,11 +90,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 calendarGrid.appendChild(header);
             });
 
-            // Add calendar days
-            const currentDate = new Date(startDate);
+            // Add calendar days - Fixed to prevent date mutation issues
+            let currentDate = new Date(startDate);
             for (let week = 0; week < 6; week++) {
                 for (let day = 0; day < 7; day++) {
-                    const dayElement = this.createDayElement(currentDate, month);
+                    const dayElement = this.createDayElement(new Date(currentDate), month);
                     calendarGrid.appendChild(dayElement);
                     currentDate.setDate(currentDate.getDate() + 1);
                 }
@@ -119,7 +119,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dayNumber.textContent = date.getDate();
             dayElement.appendChild(dayNumber);
 
-            const dateString = date.toISOString().split('T')[0];
+            // Fixed date string formatting to ensure consistency
+            const dateString = this.formatDateToString(date);
             const dayRecords = this.attendanceRecords.filter(record => record.date === dateString);
 
             dayRecords.forEach((record) => {
@@ -158,12 +159,19 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             dayElement.addEventListener('click', () => {
-                if (date.getMonth() === currentMonth || date.getMonth() === currentMonth - 1 || date.getMonth() === currentMonth + 1) {
-                    this.openAddModal(dateString);
-                }
+                // Allow clicking on any visible day
+                this.openAddModal(dateString);
             });
 
             return dayElement;
+        }
+
+        // Helper function to ensure consistent date formatting
+        formatDateToString(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         }
 
         openAddModal(date = '') {
@@ -172,15 +180,18 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('saveButton').textContent = 'Save Record';
             
             document.getElementById('subject').value = '';
-            document.getElementById('date').value = date || new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = date || this.formatDateToString(new Date());
             document.getElementById('status').value = 'present';
             
             new bootstrap.Modal(document.getElementById('addAttendanceModal')).show();
         }
 
         editRecord(record) {
+            // More robust way to find the record
             this.editingIndex = this.attendanceRecords.findIndex(r => 
-                r.subject === record.subject && r.date === record.date && r.status === record.status
+                r.subject === record.subject && 
+                r.date === record.date && 
+                r.status === record.status
             );
             
             document.getElementById('modalTitle').textContent = 'Edit Attendance Record';
@@ -196,7 +207,9 @@ document.addEventListener('DOMContentLoaded', function () {
         deleteRecord(record) {
             if (confirm(`Delete attendance record for ${record.subject} on ${record.date}?`)) {
                 const index = this.attendanceRecords.findIndex(r => 
-                    r.subject === record.subject && r.date === record.date && r.status === record.status
+                    r.subject === record.subject && 
+                    r.date === record.date && 
+                    r.status === record.status
                 );
                 if (index > -1) {
                     this.attendanceRecords.splice(index, 1);
@@ -208,16 +221,36 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         saveAttendance() {
-            const subject = document.getElementById('subject').value;
+            const subject = document.getElementById('subject').value.trim();
             const date = document.getElementById('date').value;
             const status = document.getElementById('status').value;
+
+            // Validate inputs
+            if (!subject || !date) {
+                alert('Please fill in all fields');
+                return;
+            }
 
             const newRecord = { subject, date, status };
 
             if (this.editingIndex >= 0) {
+                // Update existing record
                 this.attendanceRecords[this.editingIndex] = newRecord;
             } else {
-                this.attendanceRecords.push(newRecord);
+                // Check for duplicate records (same subject and date)
+                const existingIndex = this.attendanceRecords.findIndex(r => 
+                    r.subject === subject && r.date === date
+                );
+                
+                if (existingIndex >= 0) {
+                    if (confirm(`A record for ${subject} on ${date} already exists. Do you want to update it?`)) {
+                        this.attendanceRecords[existingIndex] = newRecord;
+                    } else {
+                        return;
+                    }
+                } else {
+                    this.attendanceRecords.push(newRecord);
+                }
             }
 
             this.saveData();
@@ -243,7 +276,8 @@ document.addEventListener('DOMContentLoaded', function () {
             statsContainer.innerHTML = '';
 
             Object.keys(subjects).forEach(subject => {
-                const percentage = (subjects[subject].present / subjects[subject].total) * 100;
+                const percentage = subjects[subject].total > 0 ? 
+                    (subjects[subject].present / subjects[subject].total) * 100 : 0;
                 
                 const col = document.createElement('div');
                 col.className = 'col-md-4 col-lg-3 mb-3';
