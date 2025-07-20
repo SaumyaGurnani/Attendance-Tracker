@@ -4,7 +4,7 @@ A modern, user-friendly web app for tracking personal attendance by students, bu
 
 ## Demo Video
 
-https://github.com/user-attachments/assets/b97ac10b-1d04-4b7b-ac78-0de5693db36d
+https://github.com/user-attachments/assets/3400597d-e9b5-4021-a7e7-4dc49df2cda3
 
 ## Deployed Link
 
