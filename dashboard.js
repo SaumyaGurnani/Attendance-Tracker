@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add/Edit Attendance
   document.getElementById('attendanceForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const subject = document.getElementById('subject').value.trim();
+    const subject = document.getElementById('subject');
     const date = document.getElementById('date').value;
     const status = document.getElementById('status').value;
     if (!subject || !date) {
