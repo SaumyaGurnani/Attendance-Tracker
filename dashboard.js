@@ -149,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (editingIndex >= 0) {
       attendanceRecords[editingIndex] = newRecord;
     } else {
-      // Remove duplicate check: allow multiple records for same subject and date
       attendanceRecords.push(newRecord);
     }
     saveAttendanceRecords(attendanceRecords);
@@ -276,13 +275,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // --- ATTENDANCE MODAL SUBJECT DROPDOWN ---
   function updateSubjectDropdown() {
-     // We can now assume the element is always a <select>
+ 
     const select = document.getElementById('subject');
     select.innerHTML = ''; // Clear old options
 
     if (subjects.length === 0) {
         select.innerHTML = '<option value="" disabled selected>No subjects available</option>';
-        select.disabled = true; // Good UX to disable it if there are no options
+        select.disabled = true; // disable it if there are no options
     } else {
         select.disabled = false;
         select.innerHTML = subjects.map(subj => `<option value="${subj}">${subj}</option>`).join('');
