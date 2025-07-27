@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
       title: record.subject + ' (' + record.status + ')',
       start: record.date,
       allDay: true,
-      extendedProps: { ...record }
+      extendedProps: { ...record } //shallow copy
     }));
   }
 
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let calendar;
 
   // FullCalendar initialization
-  var calendarEl = document.getElementById('calendar');
+  let calendarEl = document.getElementById('calendar');
   if (calendarEl) {
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
